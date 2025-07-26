@@ -10,5 +10,9 @@ class Settings(BaseSettings):
     REDIS_HOST: str = "redis"
     REDIS_PORT: int = 6379
     ENV: str = "production"
+class BitConfig:
+    API_KEY = "ваш_api_ключ"
+    API_URL = "https://bit.il/api/v1/payment"
+
 
 settings = Settings()
