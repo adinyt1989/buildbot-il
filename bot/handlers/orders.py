@@ -4,6 +4,18 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from modules.orders import service as order_service
 from modules.orders import schemas as order_schemas
 from core.database import get_db
+from aiogram import types
+from modules.orders.service import OrderService
+
+@dp.message_handler(commands=["new_order"])
+async def create_order(message: types.Message):
+    await OrderService.create_order(message.from_user.id)
+    await message.answer("📝 Заказ создан!")
+
+@dp.message_handler(commands=["my_orders"])
+async def list_orders(message: types.Message):
+    orders = await OrderService.get_user_orders(message.from_user.id)
+    await message.answer(f"📋 Ваши заказы: {len(orders)}")
 
 class OrderCreationStates(StatesGroup):
     WORK_TYPE = State()
