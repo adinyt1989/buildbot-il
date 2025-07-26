@@ -3,6 +3,16 @@ from core.models import Order, User, OrderStatus
 from .schemas import OrderCreate
 from modules.payments import service as payments
 from datetime import datetime
+from core.models import Order
+from core.databases import async_session
+
+class OrderService:
+    @staticmethod
+    async def create_order(user_id: UUID):
+        async with async_session() as session:
+            order = Order(customer_id=user_id)
+            session.add(order)
+            await session.commit()
 
 async def create_order(db, order_data: OrderCreate):
     # Проверка депозита для крупных заказов
