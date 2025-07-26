@@ -1,4 +1,6 @@
 import asyncio
+import logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
 from aiogram import Bot, Dispatcher
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from core.config import settings
