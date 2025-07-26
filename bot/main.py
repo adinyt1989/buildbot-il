@@ -6,6 +6,9 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from core.config import settings
 from bot.handlers import auth, orders, payments, profile
 
+import datetime
+current_date = datetime.datetime.now().strftime("%b %d %H:%M:%S %p")
+
 bot = Bot(token=settings.TELEGRAM_TOKEN)
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
