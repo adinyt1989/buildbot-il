@@ -4,6 +4,17 @@ from sqlalchemy.ext.declarative import declarative_base
 import enum
 import uuid
 from datetime import datetime
+from sqlalchemy import Column, String, UUID, ForeignKey
+from .databases import Base
+
+class Order(Base):
+    __tablename__ = "orders"
+
+    id = Column(UUID(as_uuid=True), primary_key=True)
+    customer_id = Column(UUID, ForeignKey("users.id"))
+    description = Column(String(500))
+    budget = Column(String(20))  # Формат: "1000-5000 ₪"
+    status = Column(String(20), default="draft")  # draft/active/completed
 
 Base = declarative_base()
 
